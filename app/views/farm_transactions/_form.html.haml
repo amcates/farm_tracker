@@ -1,0 +1,35 @@
+= form_for @farm_transaction do |f|
+  - if @farm_transaction.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@farm_transaction.errors.count, "error")} prohibited this transaction from being saved:"
+      %ul
+        - @farm_transaction.errors.full_messages.each do |message|
+          %li= message
+
+  .mb-3
+    = f.label :transaction_type, class: 'form-label'
+    = f.select :transaction_type, FarmTransaction::TRANSACTION_TYPES.collect{|x| [x.to_s, x.to_s]}, {include_blank: 'Select'}, class: 'form-select'
+  
+  .mb-3
+    = f.label :animal, class: 'form-label'
+    = f.select :animal, FarmTransaction::ANIMALS.collect{|x| [x.to_s, x.to_s]}, {include_blank: 'Select'}, class: 'form-select'
+
+  .mb-3
+    = f.label :item_name, class: 'form-label'
+    = f.select :item_name, FarmTransaction::ITEMS.collect{|x| [x.to_s, x.to_s]}, {include_blank: 'Select'}, class: 'form-select'
+  
+  .mb-3
+    = f.label :description, class: 'form-label'
+    = f.text_area :description, class: 'form-control'
+
+  .mb-3
+    = f.label :amount, class: 'form-label'
+    = f.text_field :amount, class: 'form-control'
+
+  .mb-3
+    = f.label :happened_on, class: 'form-label'
+    = f.date_field :happened_on, class: 'form-control'
+
+  .actions
+    = f.submit 'Save', class: 'btn btn-primary'
+    = link_to 'Cancel', @farm_transaction, class: 'btn btn-secondary'

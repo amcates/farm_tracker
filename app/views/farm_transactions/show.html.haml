@@ -1,0 +1,31 @@
+%h1 Viewing transaction
+
+= form_for @farm_transaction do |f|
+
+  .mb-3
+    = f.label :transaction_type, class: 'form-label'
+    = f.select :transaction_type, FarmTransaction::TRANSACTION_TYPES.collect{|x| [x.to_s, x.to_s]}, {include_blank: 'Select'}, class: 'form-select', disabled: true
+  
+  .mb-3
+    = f.label :animal, class: 'form-label'
+    = f.select :animal, FarmTransaction::ANIMALS.collect{|x| [x.to_s, x.to_s]}, {include_blank: 'Select'}, class: 'form-select', disabled: true
+
+  .mb-3
+    = f.label :item_name, class: 'form-label'
+    = f.select :item_name, FarmTransaction::ITEMS.collect{|x| [x.to_s, x.to_s]}, {include_blank: 'Select'}, class: 'form-select', disabled: true
+  
+  .mb-3
+    = f.label :description, class: 'form-label'
+    = f.text_area :description, class: 'form-control', disabled: true
+
+  .mb-3
+    = f.label :amount, class: 'form-label'
+    = f.text_field :amount, class: 'form-control', disabled: true
+
+  .mb-3
+    = f.label :happened_on, class: 'form-label'
+    = f.date_field :happened_on, class: 'form-control', disabled: true
+
+= link_to 'Edit', edit_farm_transaction_path(@farm_transaction), class: 'btn btn-secondary'
+= link_to 'Destroy', @farm_transaction, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-danger'
+= link_to 'Back to list', farm_transactions_path, class: 'btn btn-primary'

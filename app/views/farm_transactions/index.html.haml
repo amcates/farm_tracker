@@ -1,0 +1,27 @@
+- if notice
+  .alert.alert-info.mt-2= notice
+
+%h1 Transaction List
+
+.table-responsive
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Type
+        %th Name
+        %th Desc.
+        %th Amt
+        %th Date 
+
+    %tbody
+      - @farm_transactions.each do |farm_transaction|
+        %tr
+          %td= link_to farm_transaction.transaction_type, farm_transaction
+          %td= farm_transaction.item_name
+          %td= farm_transaction.description
+          %td= farm_transaction.amount
+          %td= farm_transaction.happened_on.strftime('%m/%d/%y')
+
+%br
+
+= link_to 'New farm transaction', new_farm_transaction_path, class: 'btn btn-success'
